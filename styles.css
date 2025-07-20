@@ -1,0 +1,85 @@
+/* PowerApps Copilot Popup Blocker Styles */
+
+/* High specificity selectors to override any existing styles */
+html body [data-testid*="copilot"],
+html body [class*="copilot"],
+html body [id*="copilot"],
+html body [aria-label*="copilot" i],
+html body [title*="copilot" i] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  position: absolute !important;
+  left: -9999px !important;
+  top: -9999px !important;
+  width: 0 !important;
+  height: 0 !important;
+  overflow: hidden !important;
+}
+
+/* Draft-related selectors */
+html body [data-testid*="draft"][class*="modal"],
+html body [class*="draft"][role="dialog"],
+html body [id*="draft"][class*="popup"],
+html body [aria-label*="draft" i][role="dialog"],
+html body [title*="draft" i][class*="modal"] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* Generic modal/popup hiding for elements that contain Copilot text */
+html body .ms-Modal:has-text("copilot"),
+html body .ms-Dialog:has-text("copilot"),
+html body [role="dialog"]:has-text("copilot"),
+html body [role="alertdialog"]:has-text("copilot") {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+}
+
+/* Hide elements marked by our content script */
+html body [data-copilot-blocked="true"] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  position: absolute !important;
+  left: -9999px !important;
+  top: -9999px !important;
+  width: 0 !important;
+  height: 0 !important;
+  overflow: hidden !important;
+  z-index: -1 !important;
+}
+
+/* PowerApps specific overrides */
+html body [class*="PowerApps"] [data-automation-id*="copilot"],
+html body [class*="powerapps"] [data-automation-id*="copilot"],
+html body [class*="PowerApps"] [data-automation-id*="draft"],
+html body [class*="powerapps"] [data-automation-id*="draft"] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+}
+
+/* Backdrop/overlay hiding for modals containing Copilot */
+html body .ms-Overlay:has([data-copilot-blocked="true"]),
+html body .modal-backdrop:has([data-copilot-blocked="true"]),
+html body .overlay:has([data-copilot-blocked="true"]) {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+}
+
+/* Additional fallback selectors for common UI frameworks */
+html body div[class*="Modal"]:has-text("draft with copilot"),
+html body div[class*="Dialog"]:has-text("draft with copilot"),
+html body div[class*="Popup"]:has-text("draft with copilot"),
+html body div[class*="Overlay"]:has-text("draft with copilot") {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+}
